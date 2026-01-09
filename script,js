@@ -1,0 +1,32 @@
+// Interaktivität: Oberfläche auswählen & Vorschau (setzt visuelle Filter auf das Hero-Bild)
+document.addEventListener('DOMContentLoaded', function(){
+  const finishSelect = document.getElementById('finish-select');
+  const hero = document.querySelector('.hero-media img');
+  const root = document.documentElement;
+
+  function applyFinish(finish){
+    switch(finish){
+      case 'natural':
+        root.style.setProperty('--accent', '#694d36');
+        hero.style.filter = 'none';
+        hero.style.opacity = '1';
+        break;
+      case 'lacquer':
+        root.style.setProperty('--accent', '#5b4f47');
+        hero.style.filter = 'saturate(0.95) contrast(1.02)';
+        break;
+      case 'dark':
+        root.style.setProperty('--accent', '#523826');
+        hero.style.filter = 'brightness(0.85) contrast(1.05)';
+        break;
+    }
+  }
+
+  // Init
+  if(finishSelect && hero){
+    applyFinish(finishSelect.value);
+    finishSelect.addEventListener('change', (e) => {
+      applyFinish(e.target.value);
+    });
+  }
+});
